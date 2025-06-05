@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
                     user: formData.get('email'),
                     action: 'Ticket Created',
                     from: '',
-                    to: 'Open',
+                    to: 'New',
                     details: 'Initial submission via dashboard form.',
                 },
             ],
