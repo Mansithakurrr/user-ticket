@@ -144,154 +144,150 @@ export default function TicketForm() {
 
   return (
     <form
-      onSubmit={handleSubmit}
-      className="w-full max-w-md mx-auto bg-white p-4 rounded-lg shadow-lg space-y-4 border border-gray-200 bg-fixed"
-    >
-      <h2 className="text-xl font-semibold text-center text-gray-800">
-        Submit a Support Ticket
-      </h2>
+        onSubmit={handleSubmit}
+        className="w-full max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg space-y-6 border border-gray-200"
+      >
+        <h2 className="text-xl font-semibold text-center text-gray-800">
+          Submit a Ticket
+        </h2>
 
-      <div>
-        <label className="block text-sm font-medium mb-1">Name</label>
-        <input
-          name="name"
-          required
-          value={name}
-          readOnly
-          className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700 text-sm"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-1">Email</label>
-        <input
-          type="email"
-          name="email"
-          required
-          value={email}
-          readOnly
-          className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700 text-sm"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-1">Mobile Number (Optional)</label>
-        <input
-          name="contactNumber"
-          pattern="[0-9]*"
-          inputMode="numeric"
-          placeholder="Enter phone number"
-          className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-1">Category</label>
-        <select
-          name="category"
-          defaultValue={category}
-          required
-          className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="bugs">Bugs</option>
-          <option value="Tech support">Tech Support</option>
-          <option value="new feature">New Feature</option>
-          <option value="others">Others</option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-1">Subject</label>
-        <input
-          name="subject"
-          required
-          minLength={1}
-          maxLength={20}
-          placeholder="Issue Title"
-          className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-1">Description</label>
-        <textarea
-          name="description"
-          required
-          minLength={1}
-          maxLength={20}
-          placeholder="Describe your issue"
-          rows={1}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-1">Attachments</label>
-        <div
-          {...getRootProps()}
-          className={`w-full p-4 border-2 border-dashed rounded-md cursor-pointer text-center ${isDragActive ? 'border-blue-400 bg-blue-50' : 'border-gray-300'
-            }`}
-        >
-          <input {...getInputProps()} />
-          {isDragActive ? (
-            <p className="text-sm text-blue-700">Drop files here...</p>
-          ) : (
-            <p className="text-sm text-gray-600">Drag & drop files here, or click to select</p>
-          )}
-          <p className="text-xs text-gray-400 mt-1">Max 5 files, 10MB each</p>
-        </div>
-
-        {files.length > 0 && (
-          <ul className="mt-2 text-sm text-gray-700 space-y-1">
-            {files.map((file, index) => (
-              <li key={index} className="flex justify-between items-center">
-                <span>{file.name} ({(file.size / 1024 / 1024).toFixed(1)} MB)</span>
-                <button
-                  type="button"
-                  onClick={() => setFiles(prev => prev.filter((_, i) => i !== index))}
-                  className="text-red-500 hover:text-red-700 text-xs"
-                >
-                  ✕
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-      {/* <input
-              type="file"
-              name="attachments"
-              multiple
-              className="w-full text-sm text-gray-600"
-            /> */}
-      {/* <p className="text-xs text-gray-500 mt-1">Max 5 files, up to 10MB each</p> */}
-    {/* </div> */}
-
-
-
-
-
-
-
+        {/* --- Grid Container for Form Fields --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
           
-      
-          {/* Hidden Fields */ }
-          <input type="hidden" name="platform" value={platform} />
-          <input type="hidden" name="organization" value={organization} />
-          <input type="hidden" name="type" value="Support" />
-      
-          <div className="text-center">
-            <button
-              type="submit"
-              disabled={submitting}
-              className="w-full py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition disabled:opacity-50"
-            >
-              {submitting ? 'Submitting...' : 'Submit Ticket'}
-            </button>
+          {/* Name - First Column */}
+          <div className="md:col-span-1">
+            <label className="block text-sm font-medium mb-1">Name</label>
+            <input
+              name="name"
+              required
+              value={name}
+              readOnly
+              className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700 text-sm"
+            />
           </div>
 
-  { error && <p className="text-center text-sm text-red-600 mt-2">⚠️ {error}</p> }
-        </form >
+          {/* Email - Second Column */}
+          <div className="md:col-span-1">
+            <label className="block text-sm font-medium mb-1">Email</label>
+            <input
+              type="email"
+              name="email"
+              required
+              value={email}
+              readOnly
+              className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700 text-sm"
+            />
+          </div>
+
+          {/* Mobile Number - First Column */}
+          <div className="md:col-span-1">
+            <label className="block text-sm font-medium mb-1">Mobile Number (Optional)</label>
+            <input
+              name="contactNumber"
+              pattern="[0-9]*"
+              inputMode="numeric"
+              placeholder="Enter phone number"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          {/* Category - Second Column */}
+          <div className="md:col-span-1">
+            <label className="block text-sm font-medium mb-1">Category</label>
+            <select
+              name="category"
+              defaultValue={category}
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="" disabled>Select a category</option>
+              <option value="bugs">Bugs</option>
+              <option value="Tech support">Tech Support</option>
+              <option value="new feature">New Feature</option>
+              <option value="others">Others</option>
+            </select>
+          </div>
+
+          {/* Subject - Full Width */}
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium mb-1">Subject</label>
+            <input
+              name="subject"
+              required
+              minLength={1}
+              maxLength={20}
+              placeholder="Issue Title"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          {/* Description - Full Width */}
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium mb-1">Description</label>
+            <textarea
+              name="description"
+              required
+              minLength={1}
+              maxLength={20}
+              placeholder="Describe your issue"
+              rows={1}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          {/* Attachments - Full Width */}
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium mb-1">Attachments</label>
+            <div
+              {...getRootProps()}
+              className={`w-full p-4 border-2 border-dashed rounded-md cursor-pointer text-center ${isDragActive ? 'border-blue-400 bg-blue-50' : 'border-gray-300'
+                }`}
+            >
+              <input {...getInputProps()} />
+              {isDragActive ? (
+                <p className="text-sm text-blue-700">Drop files here...</p>
+              ) : (
+                <p className="text-sm text-gray-600">Drag & drop files here, or click to select</p>
+              )}
+              <p className="text-xs text-gray-400 mt-1">Max 5 files, 10MB each</p>
+            </div>
+
+            {files.length > 0 && (
+              <ul className="mt-2 text-sm text-gray-700 space-y-1">
+                {files.map((file, index) => (
+                  <li key={index} className="flex justify-between items-center">
+                    <span>{file.name} ({(file.size / 1024 / 1024).toFixed(1)} MB)</span>
+                    <button
+                      type="button"
+                      onClick={() => setFiles(prev => prev.filter((_, i) => i !== index))}
+                      className="text-red-500 hover:text-red-700 text-xs"
+                    >
+                      ✕
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+        
+        {/* Hidden Fields and Submit Button remain outside the grid */}
+        <input type="hidden" name="platform" value={platform} />
+        <input type="hidden" name="organization" value={organization} />
+        <input type="hidden" name="type" value="Support" />
+    
+        <div className="text-center pt-2">
+          <button
+            type="submit"
+            disabled={submitting}
+            className="w-full py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition disabled:opacity-50"
+          >
+            {submitting ? 'Submitting...' : 'Submit Ticket'}
+          </button>
+        </div>
+
+        {/* { error && <p className="text-center text-sm text-red-600 mt-2">⚠️ {error}</p> } */}
+      </form>
       );
 
 }
