@@ -181,7 +181,7 @@ export default function TicketForm() {
 
           {/* Mobile Number - First Column */}
           <div className="md:col-span-1">
-            <label className="block text-sm font-medium mb-1">Mobile Number (Optional)</label>
+            <label className="block text-sm font-medium mb-1">Mobile Number</label>
             <input
               name="contactNumber"
               pattern="[0-9]*"
